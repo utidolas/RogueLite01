@@ -2247,6 +2247,10 @@ PrefabInstance:
       propertyPath: damage
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 6615216199304156510, guid: 2623cdb02b09f77418a1c4205fcdc384, type: 3}
+      propertyPath: WeaponData
+      value: 
+      objectReference: {fileID: 11400000, guid: e9c1fdd3207fcdc43b1b94e754145cec, type: 2}
     - target: {fileID: 7602800814030203919, guid: 2623cdb02b09f77418a1c4205fcdc384, type: 3}
       propertyPath: mainCam
       value: 

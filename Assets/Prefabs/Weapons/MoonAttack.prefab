@@ -99,6 +99,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   destroyAfter: 5
+  WeaponData: {fileID: 11400000, guid: e9c1fdd3207fcdc43b1b94e754145cec, type: 2}
   popUpPrefab: {fileID: 3942420024513047242, guid: ebff36436deeb4f40bfb0997a2acc974, type: 3}
 --- !u!60 &6766651739860418419
 PolygonCollider2D:
