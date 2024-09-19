@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ede7b5dc3c59b2d48888cba1b9b35b08, type: 3}
+  m_Name: MoonWeaponData
+  m_EditorClassIdentifier: 
+  WeaponPrefab: {fileID: 8112586661661683997, guid: 56904ad0e8454aa4fa8c8ec31fdf680d, type: 3}
+  damage: 10
+  speed: 3
+  cooldown: 7
+  piercing: 0

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.Mathematics;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -10,27 +11,38 @@ public class PlayerMovementScript : MonoBehaviour, IDamageable
     // Components within the object
     private Rigidbody2D rb;
     private Animator anim;
+    private InventoryManager inventory;
+    public PlayerStatus player_status;
 
     // Components outside the object
-    private MageShootScript furBall_script;
+    private MageShootScript mageShoot_script;
+    public PlayerScriptableObject PlayerData;
 
     // Serialized Vars
-    [SerializeField] private float playerSpeed;
     [SerializeField] HealthBarScript healthBar_script;
-
-    [SerializeField] float maxHealth = 1000;
-    [SerializeField] float currentHealth = 1000;
 
     // Vars
     float dirX;
     float dirY;
+    int weaponIndex;
+
+    // Spawned weapons
+    public List<GameObject> spawnedWeapons;
+
+    private void Awake()
+    {
+        inventory = GetComponent<InventoryManager>();
+        mageShoot_script = FindFirstObjectByType<MageShootScript>();
+        rb = GetComponent<Rigidbody2D>();
+        anim = GetComponent<Animator>();
+
+        // Spawn the start weapon
+        SpawnWeapon(PlayerData.StartingWeapon);
+    }
 
     private void Start()
     {
-        furBall_script = FindFirstObjectByType<MageShootScript>();
-        rb = GetComponent<Rigidbody2D>();
-        anim = GetComponent<Animator>();
-        healthBar_script.UpdateHealthBar(currentHealth, maxHealth);
+        healthBar_script.UpdateHealthBar(player_status.CurrentHealth, PlayerData.MaxHealth);
     }
 
     private void Update()
@@ -51,7 +63,7 @@ public class PlayerMovementScript : MonoBehaviour, IDamageable
         }
 
         // Changing to attack anim
-        if (!furBall_script.canFire)
+        if (!mageShoot_script.canFire)
         {
             anim.SetBool("hasAttacked", true);
         }
@@ -65,7 +77,7 @@ public class PlayerMovementScript : MonoBehaviour, IDamageable
     // Moving player
     private void FixedUpdate()
     {
-        rb.velocity = new Vector2(dirX, dirY).normalized * playerSpeed * Time.deltaTime; 
+        rb.velocity = new Vector2(dirX, dirY).normalized * player_status.CurrentSpeed * Time.deltaTime; 
     }
 
     private void Rotating(float dirX, float dirY)
@@ -83,12 +95,32 @@ public class PlayerMovementScript : MonoBehaviour, IDamageable
     //==================== DAMAGE AND DIE ====================
     public void Damage(float dmg)
     {
-        currentHealth -= dmg;
-        healthBar_script.UpdateHealthBar(currentHealth, maxHealth);
+        player_status.CurrentHealth -= dmg;
+        healthBar_script.UpdateHealthBar(player_status.CurrentHealth, PlayerData.MaxHealth);
     }
 
     public void Die()
     {
         throw new System.NotImplementedException();
+    }
+
+    //==================== WEAPONS ====================
+
+    //Spawn weapon
+    public void SpawnWeapon(GameObject weapon)
+    {
+        // Check if list not full
+        if(weaponIndex >= inventory.weaponSlots.Count - 1)
+        {
+            Debug.LogError("Full inventory");
+            return;
+        }
+
+        // Spawn weapon, set as child, add to inventory
+        GameObject spawnedWeapon = Instantiate(weapon, transform.position, Quaternion.identity);
+        spawnedWeapon.transform.SetParent(transform);
+        inventory.AddWeapon(weaponIndex, spawnedWeapon.GetComponent<WeaponBase>());
+
+        weaponIndex++;
     }
 }

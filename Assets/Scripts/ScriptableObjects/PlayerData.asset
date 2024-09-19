@@ -9,11 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ede7b5dc3c59b2d48888cba1b9b35b08, type: 3}
-  m_Name: MoonWeapon
+  m_Script: {fileID: 11500000, guid: 5ccf75e5dd32a034aae490c5c0b3a266, type: 3}
+  m_Name: PlayerData
   m_EditorClassIdentifier: 
-  WeaponPrefab: {fileID: 8112586661661683997, guid: 56904ad0e8454aa4fa8c8ec31fdf680d, type: 3}
-  damage: 10
-  speed: 3
-  cooldown: 7
-  piercing: 0
+  maxHealth: 1000
+  speed: 150
+  startingWeapon: {fileID: 8549468391865020105, guid: 5af5fcbefe614704795bdcaacebf5ae1, type: 3}

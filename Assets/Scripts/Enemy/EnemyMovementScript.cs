@@ -7,30 +7,25 @@ using UnityEngine.Events;
 
 public class EnemyMovementScript : MonoBehaviour, IDamageable
 {
-    // Components within the object
-    public StatusScript status_script;
-    public FlashDamage flashDamage_script;
+    // Components inside the object
+    public EnemyStatusScript enemyStatus_script;
 
     // Components outside the object
     private GameObject player_object;
+    public EnemyScriptableObject enemyData;
 
     // Serialized Vars
-    [SerializeField] private float enemySpeed = .03f;
     [SerializeField] UnityEvent whenDamage;
-    [SerializeField] private float expAmount;
 
-    // Vars
-    int damage = 100;
 
     private void Start()
     {
-        status_script = GetComponent<StatusScript>();
         player_object = GameObject.FindWithTag("Player");
     }
 
     private void Update()
     {
-        transform.position = Vector2.MoveTowards(transform.position, player_object.transform.position, enemySpeed * Time.deltaTime);
+        transform.position = Vector2.MoveTowards(transform.position, player_object.transform.position, enemyStatus_script.CurrentMoveSpeed * Time.deltaTime);
         RotateToPlayer();
 
     }
@@ -51,10 +46,10 @@ public class EnemyMovementScript : MonoBehaviour, IDamageable
     // ==================== DAMAGE AND DIE ====================
     public void Damage(float dmg)
     {
-        status_script.CurrentHealth -= dmg;
-        if (status_script.CurrentHealth <= 0)
+        enemyStatus_script.CurrentHealth -= dmg;
+        if (enemyStatus_script.CurrentHealth <= 0)
         {
-            player_object.GetComponent<LevelScript>().AddExp(expAmount);
+            player_object.GetComponent<LevelScript>().AddExp(enemyStatus_script.CurrentExpAmount);
             Die();
         }
         whenDamage.Invoke();
@@ -77,6 +72,6 @@ public class EnemyMovementScript : MonoBehaviour, IDamageable
 
     private void Attack()
     {
-        player_object.GetComponent<PlayerMovementScript>().Damage(damage);
+        player_object.GetComponent<PlayerMovementScript>().Damage(enemyStatus_script.CurrentDamage);
     }
 }

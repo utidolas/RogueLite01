@@ -7,7 +7,19 @@ using UnityEngine.Events;
 
 public class EnemyScriptableObject : ScriptableObject
 {
-    public float damage;
-    public float enemySpeed;
-    public float expAmount;
+    [SerializeField]
+    float maxHealth;
+    public float MaxHealth { get => maxHealth; private set => maxHealth = value; }
+
+    [SerializeField]
+    float damage;
+    public float Damage { get =>  damage; private set => damage = value; }
+
+    [SerializeField]
+    float enemySpeed;
+    public float EnemySpeed { get => enemySpeed; private set => enemySpeed = value; }
+
+    [SerializeField]
+    float expAmount;
+    public float ExpAmount { get => expAmount; private set => expAmount = value; }
 }

@@ -14,8 +14,8 @@ GameObject:
   - component: {fileID: 5273574678249985779}
   - component: {fileID: 1452912562026675399}
   - component: {fileID: 5212385525359143091}
-  - component: {fileID: 6355244998348961681}
   - component: {fileID: 5589381261697762350}
+  - component: {fileID: 5883038797286051415}
   m_Layer: 0
   m_Name: EnemySlime
   m_TagString: Enemy
@@ -129,9 +129,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5cd5331ed154337489091e4bb2b9b4ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  status_script: {fileID: 0}
-  flashDamage_script: {fileID: 0}
-  enemySpeed: 1
+  enemyStatus_script: {fileID: 5883038797286051415}
+  enemyData: {fileID: 11400000, guid: 6f2047e1786809c4f834488f3cebeb2d, type: 2}
   whenDamage:
     m_PersistentCalls:
       m_Calls:
@@ -147,7 +146,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  expAmount: 500
 --- !u!95 &1452912562026675399
 Animator:
   serializedVersion: 7
@@ -216,20 +214,6 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 0.9174924, y: 0.7180979}
   m_EdgeRadius: 0
---- !u!114 &6355244998348961681
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3101923975217675218}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ae1cfaa7d323c02488ba0e638f8ffbd3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  MaxHealth: 15
-  CurrentHealth: 0
 --- !u!114 &5589381261697762350
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -244,3 +228,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   flashMaterial: {fileID: 2100000, guid: 5232032e0f8ff8e489fb645051689bee, type: 2}
   duration: 0.2
+--- !u!114 &5883038797286051415
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3101923975217675218}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae1cfaa7d323c02488ba0e638f8ffbd3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  EnemyData: {fileID: 11400000, guid: 6f2047e1786809c4f834488f3cebeb2d, type: 2}
+  CurrentMoveSpeed: 0
+  CurrentHealth: 0
+  CurrentDamage: 0
+  CurrentExpAmount: 0
